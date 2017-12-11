@@ -1,0 +1,2 @@
+# redux.store
+Store/Shop
