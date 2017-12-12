@@ -1,0 +1,49 @@
+{
+  "name": "redux.messenger",
+  "version": "1.0.0",
+  "description": "Web messenger",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./bin/www",
+    "build": "node node_modules/.bin/webpack --config webpack.config.prod.js",
+    "dev": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pavelgolmanpi/redux.messenger.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pavelgolmanpi/redux.messenger/issues"
+  },
+  "homepage": "https://github.com/pavelgolmanpi/redux.messenger#readme",
+  "devDependencies": {
+    "babel-core": "^6.18.2",
+    "babel-loader": "^6.2.8",
+    "babel-preset-env": "^0.0.1",
+    "babel-preset-react": "^6.16.0",
+    "webpack": "^1.13.3",
+    "webpack-dev-server": "^1.16.2"
+  },
+  "dependencies": {
+    "async": "^2.1.4",
+    "axios": "^0.15.3",
+    "bcrypt": "^0.8.7",
+    "body-parser": "~1.15.2",
+    "compression": "^1.6.2",
+    "compression-webpack-plugin": "^0.3.2",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.3.3",
+    "ejs": "^2.5.3",
+    "express": "~4.14.0",
+    "express-jwt": "^5.1.0",
+    "jsonwebtoken": "^7.1.9",
+    "lodash": "^4.17.2",
+    "morgan": "^1.9.0",
+    "mysql2": "^1.5.1",
+    "pug": "^2.0.0-rc.4",
+    "sequelize": "^4.28.0",
+    "serve-favicon": "~2.3.2"
+  }
+}
