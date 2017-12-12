@@ -11,8 +11,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchProducts: () => {
-      dispatch(fetchProducts()).then((response) => {
+    fetchProducts: (offset, limit) => {
+      dispatch(fetchProducts(offset, limit)).then((response) => {
             !response.error ? dispatch(fetchProductsSuccess(response.payload.data)) : dispatch(fetchProductsFailure(response.payload.data));
           });
     }

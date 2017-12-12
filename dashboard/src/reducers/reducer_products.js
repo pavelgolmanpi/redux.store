@@ -7,7 +7,7 @@ import {
 } from '../actions/products';
 
 
-	const INITIAL_STATE = { productsList: {products: [], error:null, loading: false},
+	const INITIAL_STATE = { productsList: {products: {count: 0, rows: []}, error:null, loading: false},
 							newProduct:{product:null, error: null, loading: false},
 							activeProduct:{product:null, error:null, loading: false},
 							deletedProduct: {product: null, error:null, loading: false},
@@ -15,17 +15,18 @@ import {
 
 export default function(state = INITIAL_STATE, action) {
   let error;
+
   switch(action.type) {
 
   case FETCH_PRODUCTS:// start fetching products and set loading = true
-  	return { ...state, productsList: {products:[], error: null, loading: true} };
+  	return { ...state, productsList: {products:{count: 0, rows: []}, error: null, loading: true} };
   case FETCH_PRODUCTS_SUCCESS:// return list of products and make loading = false
     return { ...state, productsList: {products: action.payload, error:null, loading: false} };
   case FETCH_PRODUCTS_FAILURE:// return error and make loading = false
     error = action.payload || {message: action.payload.message};//2nd one is network or server down errors
-    return { ...state, productsList: {products: [], error: error, loading: false} };
+    return { ...state, productsList: {products:{count: 0, rows: []}, error: error, loading: false} };
   case RESET_PRODUCTS:// reset productsList to initial state
-    return { ...state, productsList: {products: [], error:null, loading: false} };
+    return { ...state, productsList: {products:{count: 0, rows: []}, error:null, loading: false} };
 
   case FETCH_PRODUCT:
     return { ...state, activeProduct:{...state.activeProduct, loading: true}};

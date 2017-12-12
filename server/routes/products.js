@@ -1,9 +1,16 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const Product = require('../models/product');
+
+const router = express.Router();
 
 router.get('/products', function(req, res, next) {
-  res.json([]);
-
+  Product.findAndCountAll({ offset: parseInt(req.query.offset), limit: parseInt(req.query.limit) }).then(products => {
+    res.json(products);
+  }).catch(function (err) {
+    return res.status(500).json({
+      message: 'Could not retrieve products'
+    });
+  });
 });
 
 router.post('/products', function(req, res, next) {

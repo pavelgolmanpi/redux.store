@@ -33,10 +33,10 @@ export const RESET_DELETED_PRODUCT = 'RESET_DELETED_PRODUCT';
 
 const ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:3000/api' : '/api';
 
-export function fetchProducts() {
+export function fetchProducts(offset, limit) {
   const request = axios({
     method: 'get',
-    url: `${ROOT_URL}/products`,
+    url: `${ROOT_URL}/products?offset=${offset}&limit=${limit}`,
     headers: []
   });
 
