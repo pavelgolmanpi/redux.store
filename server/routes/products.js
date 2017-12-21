@@ -1,5 +1,5 @@
 const express = require('express');
-const Product = require('../models/product');
+const {Product} = require('../database/connect');
 
 const router = express.Router();
 
@@ -14,13 +14,22 @@ router.get('/products', function(req, res, next) {
 });
 
 router.post('/products', function(req, res, next) {
-
     res.json({});
 });
 
 router.get('/products/:id', function(req, res, next) {
-
-    res.json({});
+    Product.findById(req.params.id).then(product => {
+      if(!product){
+        return res.status(404).json({
+          message: 'Could not retrieve product'
+        });
+      }
+      res.json(product);
+    }).catch(function (err) {
+      return res.status(500).json({
+        message: 'Could not retrieve product'
+      });
+    });
 });
 
 router.delete('/products/:id', function(req, res, next) {

@@ -7,9 +7,6 @@ const bodyParser = require('body-parser');
 
 const router = express.Router();
 
-//routes
-var products = require('./routes/products');
-
 const app = express();
 
 app.engine('html', require('ejs').renderFile);
@@ -37,8 +34,13 @@ app.use(function(req, res, next) {
 
 const staticPath = 'public';
 
+//routes
+var products = require('./routes/products');
+var categories = require('./routes/categories');
+
 app.use(logger('dev'));
 app.use('/api/', products);
+app.use('/api/', categories);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: false

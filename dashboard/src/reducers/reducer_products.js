@@ -1,14 +1,16 @@
 import {
 	FETCH_PRODUCTS, FETCH_PRODUCTS_SUCCESS, FETCH_PRODUCTS_FAILURE, RESET_PRODUCTS,
 	FETCH_PRODUCT, FETCH_PRODUCT_SUCCESS,  FETCH_PRODUCT_FAILURE, RESET_ACTIVE_PRODUCT,
-	CREATE_PRODUCT, CREATE_PRODUCT_SUCCESS, CREATE_PRODUCT_FAILURE, RESET_NEW_PRODUCT,
+	CREATE_PRODUCT, CREATE_PRODUCT_SUCCESS, CREATE_PRODUCT_FAILURE, RESET_CREATE_PRODUCT,
+	EDIT_PRODUCT, EDIT_PRODUCT_SUCCESS, EDIT_PRODUCT_FAILURE, RESET_EDIT_PRODUCT,
 	DELETE_PRODUCT, DELETE_PRODUCT_SUCCESS, DELETE_PRODUCT_FAILURE, RESET_DELETED_PRODUCT,
   VALIDATE_PRODUCT_FIELDS,VALIDATE_PRODUCT_FIELDS_SUCCESS, VALIDATE_PRODUCT_FIELDS_FAILURE, RESET_PRODUCT_FIELDS
 } from '../actions/products';
 
 
 	const INITIAL_STATE = { productsList: {products: {count: 0, rows: []}, error:null, loading: false},
-							newProduct:{product:null, error: null, loading: false},
+							//newProduct:{product:null, error: null, loading: false},
+							editProduct:{product:null, error: null, loading: false},
 							activeProduct:{product:null, error:null, loading: false},
 							deletedProduct: {product: null, error:null, loading: false},
 						};
@@ -45,8 +47,18 @@ export default function(state = INITIAL_STATE, action) {
   case CREATE_PRODUCT_FAILURE:
     error = action.payload || {message: action.payload.message};//2nd one is network or server down errors
   	return {...state, newProduct: {product:null, error:error, loading: false}}
-  case RESET_NEW_PRODUCT:
+  case RESET_CREATE_PRODUCT:
   	return {...state,  newProduct:{product:null, error:null, loading: false}}
+
+	case EDIT_PRODUCT:
+		return {...state, editProduct: {...state.newProduct, loading: true}}
+	case EDIT_PRODUCT_SUCCESS:
+		return {...state, editProduct: {product:action.payload, error:null, loading: false}}
+	case EDIT_PRODUCT_FAILURE:
+		error = action.payload || {message: action.payload.message};//2nd one is network or server down errors
+		return {...state, editProduct: {product:null, error:error, loading: false}}
+	case RESET_EDIT_PRODUCT:
+		return {...state,  editProduct:{product:null, error:null, loading: false}}
 
 
   case DELETE_PRODUCT:

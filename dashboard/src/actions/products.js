@@ -10,7 +10,13 @@ export const RESET_PRODUCTS = 'RESET_PRODUCTS';
 export const CREATE_PRODUCT = 'CREATE_PRODUCT';
 export const CREATE_PRODUCT_SUCCESS = 'CREATE_PRODUCT_SUCCESS';
 export const CREATE_PRODUCT_FAILURE = 'CREATE_PRODUCT_FAILURE';
-export const RESET_NEW_PRODUCT = 'RESET_NEW_PRODUCT';
+export const RESET_CREATE_PRODUCT = 'RESET_CREATE_PRODUCT';
+
+//Edit product
+export const EDIT_PRODUCT = 'EDIT_PRODUCT';
+export const EDIT_PRODUCT_SUCCESS = 'EDIT_PRODUCT_SUCCESS';
+export const EDIT_PRODUCT_FAILURE = 'EDIT_PRODUCT_FAILURE';
+export const RESET_EDIT_PRODUCT = 'RESET_EDIT_PRODUCT';
 
 //Validate product fields like Title
 export const VALIDATE_PRODUCT_FIELDS = 'VALIDATE_PRODUCT_FIELDS';
@@ -121,13 +127,50 @@ export function createProductFailure(error) {
   };
 }
 
-export function resetNewProduct() {
+export function resetCreateProduct() {
   return {
-    type: RESET_NEW_PRODUCT
+    type: RESET_CREATE_PRODUCT
   }
 }
 ;
 
+
+export function editProduct(props, tokenFromStorage) {
+  const request = axios({
+    method: 'post',
+    data: props,
+    url: `${ROOT_URL}/products`,
+    //headers: {
+    //  'Authorization': `Bearer ${tokenFromStorage}`
+    //}
+  });
+
+  return {
+    type: EDIT_PRODUCT,
+    payload: request
+  };
+}
+
+export function editProductSuccess(product) {
+  return {
+    type: EDIT_PRODUCT_SUCCESS,
+    payload: product
+  };
+}
+
+export function editProductFailure(error) {
+  return {
+    type: EDIT_PRODUCT_FAILURE,
+    payload: error
+  };
+}
+
+export function resetEditProduct() {
+  return {
+    type: RESET_EDIT_PRODUCT
+  }
+}
+;
 
 export function fetchProduct(id) {
   const request = axios.get(`${ROOT_URL}/products/${id}`);
@@ -141,7 +184,7 @@ export function fetchProduct(id) {
 
 export function fetchProductSuccess(activeProduct) {
   return {
-    type: FETCH_PRODUT_SUCCESS,
+    type: FETCH_PRODUCT_SUCCESS,
     payload: activeProduct
   };
 }
